@@ -5,14 +5,14 @@ include('connection.php');
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-$hash = hash("sha256", $password);
-$query = $mysqli->prepare("SELECT * FROM users WHERE email=? AND password=?`");
-$query->bind_param('ss', $email, $hash);
+
+$query = $mysqli->prepare("SELECT * FROM users WHERE email=? AND password=?");
+$query->bind_param('ss', $email, $password);
 $query->execute();
+
 $result = $query->get_result();
-while ($query = $result->fetch_assoc()) {
-    $data = $query;
-}
+
+$data = $result->fetch_assoc();
 
 $response["status"] = $data;
 

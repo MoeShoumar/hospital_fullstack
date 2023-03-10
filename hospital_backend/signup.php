@@ -7,19 +7,30 @@ include('connection.php');
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
-$date_of_birth = $POST['date_of_birth'];
+$date_of_birth = $_POST['date_of_birth'];
+$hash = hash("sha256", $password);
+$user_type = $_POST['user_type'];
+$gender = $_POST['gender'];
 
-$check_email = $mysqli->prepare('select name, password, date_of_birth, email from users where email=?');
-$check_email->bind_param('s', $email);
-$check_email->execute();
-$check_email->store_result();
-
-$hashed = hash("sha256", $password);
-
-while ($check_email = $result->fetch_assoc()) {
-    $data = $check_email;
+$sign_up = $mysqli->prepare('SELECT * from users where email=?');
+$sign_up->bind_param('s', $email);
+$sign_up->execute();
+$results = $sign_up->get_result();
+$data = null;
+while ($object = $results->fetch_assoc()) {
+    $data = $object;
 }
 
 $response["status"] = $data;
+
+if (isset($data)) {
+    $response = ["user already exist"];
+} else {
+    $sign_up = $mysqli->prepare("INSERT INTO users(name,email,password,date_of_birth,user_type,gender) VALUES (?, ?,?,?,?,?)");
+    $sign_up->bind_param('ssssss', $name, $email, $hash, $date_of_birth, $user_type, $gender);
+    $sign_up->execute();
+    $results = $sign_up->get_result();
+    $response = ["user added"];
+}
 
 echo json_encode(["response" => $response]);
