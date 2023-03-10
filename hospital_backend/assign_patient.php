@@ -13,12 +13,12 @@ $result = $query->get_result();
 $data = $result->fetch_assoc();
 
 if (isset($data)) {
-    $response = ['User is already assigned to a hospital'];
+    $response = ['Patient is already assigned to a hospital'];
 } else {
     $query = $mysqli->prepare('INSERT INTO hospital_users (hospital_id, user_id) VALUES (?, ?)');
     $query->bind_param('ii', $hospital_id, $user_id);
     $query->execute();
-    $response = ['user added successfully'];
+    $response = ['Patient assigned successfully'];
 }
 echo json_encode($response);
 
