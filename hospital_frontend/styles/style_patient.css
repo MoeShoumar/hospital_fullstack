@@ -1,0 +1,163 @@
+
+
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  input[type="number"] {
+    width: 4rem;
+  }
+  
+  button {
+    background-color: #3c6382;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 1rem 0;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  button:hover {
+    background-color: #3c6382;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  
+  
+  .department {
+    background-color: #f2f2f2;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .department select {
+    width: 30%;
+    padding: 0.5rem;
+  }
+  
+ 
+  
+  .room {
+    background-color: #e6e6e6;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .room select {
+    width: 30%;
+    padding: 0.5rem;
+  }
+  
+
+  
+  .bed {
+    background-color: #d9d9d9;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .bed select {
+    width: 30%;
+    padding: 0.5rem;
+  }
+  
+  
+  
+  .services {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .services li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .services input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+  
+  .medication-section {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .medication-section .section-title {
+    margin-bottom: 1rem;
+  }
+  
+  .medication-section input[type="checkbox"] {
+    margin-right: 0.5rem;
+  }
+  
+
+  
+  .patient-info {
+    background-color: #f2f2f2;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+  
+  .patient-info input[type="text"],
+  .patient-info input[type="email"],
+  .patient-info input[type="password"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .patient-info input[type="submit"] {
+    background-color: #3c6382;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  .patient-info input[type="submit"]:hover {
+    background-color: #3c6382;
+  }
+  
+
+  

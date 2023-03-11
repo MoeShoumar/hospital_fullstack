@@ -8,14 +8,115 @@
     <title>Document</title>
 </head>
 <body>
+
     
+    <main>
+        <section class="department">
+            <h2>Choose a Department</h2>
+            <form>
+                <select name="department">
+                    <option value="">Select a department</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="neurology">Neurology</option>
+                    <option value="oncology">Oncology</option>
+                </select>
+            </form>
+        </section>
+        
+        <section class="room">
+            <h2>Choose a Room</h2>
+            <form>
+                <select name="room">
+                    <option value="">Select a room</option>
+                    <option value="room1">Room 1</option>
+                    <option value="room2">Room 2</option>
+                    <option value="room3">Room 3</option>
+                </select>
+            </form>
+        </section>
+        <section class="bed">
+            <h2>Choose a Bed</h2>
+            <form>
+                <select name="bed">
+                    <option value="">Select a bed</option>
+                    <option value="bed1">bed 1</option>
+                    <option value="bed2">bed 2</option>
+                    <option value="bed3">bed 3</option>
+                </select>
+            </form>
+        </section>
+        
+        
+        <section class="services">
+            <h2>List of Services</h2>
+            <ul>
+                <li><input type="checkbox" id="service1" name="service1" value="service1"><label for="service1">Shower</label></li>
+                <li><input type="checkbox" id="service2" name="service2" value="service2"><label for="service2">Food</label></li>
+                <li><input type="checkbox" id="service3" name="service3" value="service3"><label for="service3">Air Conditioner</label></li>
+            </ul>
+        </section>
+        
+            <section class="medication-section">
+                <h2 class="section-title">Medications</h2>
+                <form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Select</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Panadol</td>
+                                <td>20</td>
+                                <td><input type="number" name="medication[]" min="0"></td>
+                                <td><input type="checkbox" name="selected_medications[]" value="Panadol"></td>
+                            </tr>
+                            <tr>
+                                <td>Unadol</td>
+                                <td>50</td>
+                                <td><input type="number" name="medication[]" min="0"></td>
+                                <td><input type="checkbox" name="selected_medications[]" value="Unadol"></td>
+                            </tr>
+                            <tr>
+                                <td>Dulexitine</td>
+                                <td>60</td>
+                                <td><input type="number" name="medication[]" min="0"></td>
+                                <td><input type="checkbox" name="selected_medications[]" value="Dulexitine"></td>
+                            </tr>
+                            <tr>
+                                <td>Cipralex</td>
+                                <td>70</td>
+                                <td><input type="number" name="medication[]" min="0"></td>
+                                <td><input type="checkbox" name="selected_medications[]" value="Cipralex"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </section>
+            
+          
+            <button onclick="generateInvoice()">Print/Download Invoice</button>
+            
+        <div class="patient-info">
+            <h2>Edit Your Profile</h2>
+            <form>
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" value="John Doe"><br><br>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" value="johndoe@example.com"><br><br>
+              <label for="password">Password:</label>
+              <input type="password" id="password" name="password" value="555-555-5555"><br><br>
+              <input type="submit" value="Save Changes">
+            </form>
+        </div>
+        
 
-
-
-
-
-
-
+               
+    </main>
     <script src="axios.min.js"></script>
     <script src="index.js"></script>
     <script>
