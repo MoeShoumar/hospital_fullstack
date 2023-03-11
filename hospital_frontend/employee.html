@@ -8,7 +8,43 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <main>
+        <div class="section">
+          <h1>Employee Information</h1>
+          <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="Khaled">
+            <label for="ssn">Social Security Number:</label>
+            <input type="text" id="ssn" name="ssn" value="123-45-6789">
+            <label for="position">Position:</label>
+            <select id="position" name="position">
+              <option value="doctor">Doctor</option>
+              <option value="nurse">Nurse</option>
+            </select>
+            <button type="submit">Save</button>
+          </form>
+        </div>
+  
+        <div class="section">
+          <h1>Assign Services</h1>
+          <form>
+            <label for="patient">Patient:</label>
+            <select id="patient" name="patient">
+              <option value="patient-1">Patient 1</option>
+              <option value="patient-2">Patient 2</option>
+              <option value="patient-3">Patient 3</option>
+            </select>
+            <label for="service">Service:</label>
+            <select id="service" name="service">
+              <option value="shower">shower</option>
+              <option value="food">food</option>
+              <option value="AC">AC</option>
+            </select>
+            <button type="submit">Assign</button>
+          </form>
+        </div>
+      </main>
+  
 
 
 
