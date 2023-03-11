@@ -23,7 +23,7 @@ while ($object = $results->fetch_assoc()) {
 
 $response["status"] = $data;
 
-if (isset($data)) {
+if ($data != null) {
     $response = ["user already exist"];
 } else {
     $sign_up = $mysqli->prepare("INSERT INTO users(name,email,password,date_of_birth,user_type,gender) VALUES (?, ?,?,?,?,?)");

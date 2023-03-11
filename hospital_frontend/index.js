@@ -25,7 +25,8 @@ hospital_pages.postAPI = async (api_url,api_data,api_token = null) =>{
 }
 
 hospital_pages.loadFor = (page) => {
-    eval ("workshop_pages.load_" + page+"();")
+    eval ("hospital_pages.load_" + page+"();")
+    
 }
 
 hospital_pages.laod_landing = ()=>{
