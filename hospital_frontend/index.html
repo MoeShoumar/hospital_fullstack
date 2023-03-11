@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hospital Sign In</h1>
+        <form class="login-form" id="login-form">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Sign In</button>
+        </form>
+        <div class="switch">
+          <a href="#" id="signup-link">Don't have an account? Sign up here.</a>
+        </div>
+        <form class="signup-form" id="signup-form">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" name="signup-email" required>
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" name="signup-password" required>
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" required>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+
+    <script src="axios.min.js"></script>
+    <script src="index.js"></script>
+    <script>
+        hospital_pages.loadFor("index")
+    </script>
+
+</body>
+</html>
