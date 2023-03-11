@@ -3,7 +3,10 @@ header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Max-Age: 86400");
 include('connection.php');
-include('JWT.php');
+include('../vendor/autoload.php');
+
+use \Firebase\JWT\JWT;
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 
@@ -19,9 +22,9 @@ while ($object = $result->fetch_assoc()) {
 
 
 $payload = array(
-    "sub" => $data['user_id'],
+    "sub" => $data['id'],
 );
-$response["token"] = JWT::encode($payload, "secret_key");
+$response["token"] = JWT::encode($payload, "secret_key", 'HS256');
 
 
 echo json_encode(["response" => $response]);
