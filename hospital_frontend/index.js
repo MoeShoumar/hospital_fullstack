@@ -54,6 +54,13 @@ hospital_pages.load_index = async ()=>{
 
 
 hospital_pages.load_admin = ()=>{
-    alert('hey')
+    alert(' helloadmin')
 }
 
+hospital_pages.load_pateint = ()=>{
+    alert('hello patient')
+}
+
+hospital_pages.load_employee = ()=>{
+    alert(' hello employee')
+}
