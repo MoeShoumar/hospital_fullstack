@@ -17,6 +17,7 @@ hospital_pages.postAPI = async (api_url,api_data, api_token = null) =>{
             api_data,
             {
                 headers:{
+                    "Content-Type": "application/json",
                     "Authorization" : "token" +api_token
                 }
             }
@@ -30,7 +31,6 @@ hospital_pages.loadFor = (page) => {
     eval ("hospital_pages.load_" + page+"();")
     
 }
-
 hospital_pages.load_index = async ()=>{
     const form = document.getElementById("login-form");
     form.addEventListener("submit", async (event) => {
@@ -40,14 +40,18 @@ hospital_pages.load_index = async ()=>{
         const data = { email: email, password: password };
         const signin_url = hospital_pages.base_url + "signin.php";
         const response = await hospital_pages.postAPI(signin_url,data);
-        console.log(response.data); 
-    if (response.data.status !== 'null'  && response.data.user_type === "3") {
-        localStorage.setItem('jwt', response.data.token);
-        window.location.href = "adminpanel.html";}
-        else if (response.data.status !== "null" && response.data.user_type === "2") {
+        // const response_string = JSON.stringify(response.data);
+        // const parsed_data = JSON.parse(response.data);
+        console.log(typeof response.data);
+        // console.log(typeof response.data['user_type']); 
+        if (response.data.user_type == 3) {
             localStorage.setItem('jwt', response.data.token);
+            window.location.href = "adminpanel.html";}
+        else if (response.data.status !== "null" && response.data.user_type == 2) {
+            localStorage.setItem('jwt', response.data.token);
+            console.log(localStorage.getItem('jwt')); 
             window.location.href = "employee.html";}
-        else if (response.data.status !== "null" && response.data.user_type === "1") {
+        else if (response.data.status !== "null" && response.data.user_type == 1) {
                 localStorage.setItem('jwt', response.data.token);
                 window.location.href = "pateint.html";}
         else {
@@ -58,6 +62,10 @@ hospital_pages.load_index = async ()=>{
     
     });
 }
+
+
+       
+    // localStorage.setItem('jwt', token);
 
 
 

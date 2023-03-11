@@ -34,5 +34,3 @@ if (!$data) {
 }
 
 echo json_encode(["response" => $response]);
-
-// <!-- A patient can choose a department and a room. If the room has more than one bed, he/she is able to choose which bed.  -->
