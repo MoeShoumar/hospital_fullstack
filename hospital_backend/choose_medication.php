@@ -8,6 +8,8 @@ $user_id = $_GET['user_id'];
 $medication_id = $_GET['medication_id'];
 $qauntity = $_GET['qauntity'];
 
+
+
 $query = $mysqli->prepare('SELECT * FROM medications WHERE id = ?');
 $query->bind_param('i', $medication_id);
 $query->execute();
