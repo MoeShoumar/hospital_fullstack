@@ -57,8 +57,27 @@ hospital_pages.load_index = async ()=>{
             error_message.textContent = "Incorrect email or password.";
             form.appendChild(error_message);
           }
-    
+
     });
+    const form_signup = document.getElementById("signup-form");
+    form_signup.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const name= document.getElementById("name").value;
+        const signup_email= document.getElementById("signup-email").value;
+        const gender = document.getElementById("gender").value;
+        const user_type= document.getElementById("user_typer").value;
+        const date_of_birth= document.getElementById("date_of_birth").value;
+        const signup_password= document.getElementById("signup-password").value;
+        const signup_data = { email: signup_email, password: signup_password, date_of_birth: date_of_birth,user_type:user_type,gender:gender,name:name  };
+        console.log(signup_data);
+        const signup_url = hospital_pages.base_url + "signup.php";
+        const response_signup = await hospital_pages.postAPI(signup_url,signup_data);
+        console.log(response_signup.data);
+        form_signup.style.display= 'none';
+        
+
+    });
+
 }
 
 hospital_pages.load_admin = async ()=>{

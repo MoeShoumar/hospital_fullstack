@@ -21,16 +21,22 @@
           <a href="#" id="signup-link">Don't have an account? Sign up here.</a>
         </div>
         <form class="signup-form" id="signup-form">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
           <label for="signup-email">Email</label>
           <input type="email" id="signup-email" name="signup-email" required>
           <label for="signup-password">Password</label>
           <input type="password" id="signup-password" name="signup-password" required>
-          <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" name="confirm-password" required>
+          <label for="gender">Gender:1 if female and 0 if male</label>
+          <input type="number" id="gender" name="gender" required>
+          <label for="user_typer">User Type: <br> 1:Patient <br> 2:Employee</label>
+          <input type="number" id="user_typer" name="user_typer" required>
+          <label for="date_of_birth">Date of Birth</label>
+          <input type="date" id="date_of_birth" name="date_of_birth" required>
           <button type="submit">Sign Up</button>
         </form>
       </div>
-    <script src=""></script>
+    
     <script src="axios.min.js"></script>
     <script src="index.js"></script>
     <script>

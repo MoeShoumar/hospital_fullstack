@@ -8,17 +8,6 @@ include('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$headers = getallheaders();
-$token = $headers['Authorization'];
-$secret_key = "secret_key";
-
-
-try {
-    $decoded_token = JWT::decode($token, new Key($secret_key, 'HS256'));
-} catch (Exception $e) {
-    http_response_code(401);
-    exit();
-}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
