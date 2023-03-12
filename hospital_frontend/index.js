@@ -59,20 +59,35 @@ hospital_pages.load_index = async ()=>{
     });
 }
 
-hospital_pages.load_admin = ()=>{
-    const form = document.getElementById("Assign_Patients_form");
-        
-
-
-
-
-
-
-
-
-
-
+hospital_pages.load_admin = async ()=>{
+    // get employee
     
+    const employee_url = hospital_pages.base_url + "get_employee.php";
+    const employee_select = document.getElementById("employee");
+    const response2 = await hospital_pages.getAPI(employee_url)
+    console.log(response2.data);
+    employees= response2.data;
+    employees.forEach((employee) => {
+        const option = document.createElement("option");
+        option.value = employee.id;
+        option.text = employee.name;
+        employee_select.appendChild(option);
+      });   
+     
+    // get pateints
+    const form = document.getElementById("Assign_Patients_form");
+    const patients_url = hospital_pages.base_url + "get_patients.php";
+    const response = await hospital_pages.getAPI(patients_url);
+    const patients = response.data;
+    const patient_select = document.getElementById("patient");
+    patients.forEach((patient) => {
+      const option = document.createElement("option");
+      option.value = patient.id;
+      option.text = patient.name;
+      patient_select.appendChild(option);
+    });   
+   
+    // assign pateints
     form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const hospital= document.getElementById("hospital").value;
@@ -110,6 +125,51 @@ hospital_pages.load_admin = ()=>{
             error_message.textContent = response.data;
             form.appendChild(error_message);
         } 
+
+        // assign employee
+        const form_employees = document.getElementById("Assign_employees_form");
+        form_employees.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            const hospital= document.getElementById("hospital").value;
+            console.log(hospital);
+            const patient= document.getElementById("employee").value;
+            console.log(employee);
+            const data = { "hospital_id": hospital, "user_id": employee };
+            const assign_employee_url = hospital_pages.base_url + "assign_employee.php";
+            const response = await hospital_pages.postAPI(assign_patient_url,data);
+            console.log( response.data);
+            console.log( response.status);
+            if (response.status == 200) {
+                const error_message = document.getElementById("error-message");
+                if (error_message) {
+                    error_message.remove();
+                }
+                let success_message = document.getElementById("success-message");
+                if (success_message && response.data != "Patient assigned successfully") {
+                    success_message.remove();
+                    success_message = null;
+                }
+                if (!success_message) {
+                    success_message = document.createElement("div");
+                    success_message.setAttribute("id", "success-message");
+                    form.appendChild(success_message);
+                }
+                success_message.textContent = response.data;
+            } else {
+                const success_message = document.getElementById("success-message");
+                if (success_message) {
+                    success_message.remove();
+                }
+                const error_message = document.createElement("div");
+                error_message.setAttribute("id", "error-message");
+                error_message.textContent = response.data;
+                form.appendChild(error_message);
+            } 
+        
+
+
+
+
     
 })
 }
