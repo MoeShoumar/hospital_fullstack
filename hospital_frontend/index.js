@@ -268,8 +268,24 @@ hospital_pages.load_pateint = async ()=>{
     console.log(response_services.data);
 
     // get medication
+    const meds_url = hospital_pages.base_url + "get_meds.php"
+const meds = document.getElementById("table_body");
 
+const response_meds= await hospital_pages.getAPI(meds_url)
+meds_data=response_meds.data
+console.log(meds_data);
 
+for (let i = 0; i < meds_data.length; i++) {   
+    table_body.innerHTML += `
+        <tr>
+            <td>${meds_data[i].name}</td>
+            <td>${meds_data[i].price}</td>
+            <td><input type="number" name="medication[]" min="0"></td>
+            <td><input type="checkbox" name="selected_medications[]"value="Panadol"></td>
+        </tr>
+    `;
+}
+console.log(response_services.data);
     // const employee_select = document.getElementById("employee");
     // const response2 = await hospital_pages.getAPI(employee_url)
     // console.log(response2.data);
