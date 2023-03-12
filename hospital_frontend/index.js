@@ -192,7 +192,7 @@ hospital_pages.load_admin = async ()=>{
         const males= document.getElementById('Male-employees')
         const AUBMC=document.getElementById('hospital-1-patients')
         const MAKASED=document.getElementById('hospital-2-patients')
-        
+
 
 
 
@@ -211,7 +211,3 @@ hospital_pages.load_pateint = async ()=>{
 hospital_pages.load_employee = ()=>{
     alert(' hello employee')
 }
-
-// if (response.data.status !== null) { - This line of code is checking if response.data.status is not null. However, based on the API response you provided earlier, it seems like the status property is a string. So, you should check if response.data.status !== "null" instead.
-
-// window.location.href = "adminpanel.html"; - This line of code is redirecting the user to the adminpanel.html page regardless of whether they are an admin or not. You should first check the user's role (e.g. by decoding the JWT token) and then redirect them to the appropriate page.
