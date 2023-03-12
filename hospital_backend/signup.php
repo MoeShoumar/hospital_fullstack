@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $data['email'];
         $password = $data['password'];
         $date_of_birth = $data['date_of_birth'];
-        $hash = hash("sha256", $password);
         $user_type = $data['user_type'];
         $gender = $data['gender'];
 
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = ["user already exist"];
         } else {
             $sign_up = $mysqli->prepare("INSERT INTO users (name,email,password,date_of_birth,user_type,gender) VALUES (?,?,?,?,?,?)");
-            $sign_up->bind_param('ssssss', $name, $email, $hash, $date_of_birth, $user_type, $gender);
+            $sign_up->bind_param('ssssss', $name, $email, $password, $date_of_birth, $user_type, $gender);
             $sign_up->execute();
             $results = $sign_up->get_result();
             $response = ["user added"];

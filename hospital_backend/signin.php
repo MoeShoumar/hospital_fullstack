@@ -8,7 +8,6 @@ include('../vendor/autoload.php');
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['CONTENT_TYPE'] === 'application/json') {
         $json_data = file_get_contents('php://input');
