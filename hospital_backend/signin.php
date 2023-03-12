@@ -4,9 +4,21 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
 include('connection.php');
 include('../vendor/autoload.php');
-$data = json_decode(file_get_contents("php://input"));
 
-use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+$headers = getallheaders();
+$token = $headers['Authorization'];
+$secret_key = "secret_key";
+
+
+try {
+    $decoded_token = JWT::decode($token, new Key($secret_key, 'HS256'));
+} catch (Exception $e) {
+    http_response_code(401);
+    exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['CONTENT_TYPE'] === 'application/json') {

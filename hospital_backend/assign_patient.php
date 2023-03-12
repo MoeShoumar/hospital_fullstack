@@ -5,37 +5,32 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorizatio
 include('connection.php');
 include('../vendor/autoload.php');
 
-// use \Firebase\JWT\JWT;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+$headers = getallheaders();
+$token = $headers['Authorization'];
+$secret_key = "secret_key";
 
 
-
-// $headers = getallheaders();
-// $token = $headers['Authorization'];
-
-// if (preg_match('/Bearer\s(\S+)/', $auth_header, $matches)) {
-//     $token = $matches[1];
-// }
-// try {
-//     $decoded = JWT::decode($token, $secret_key, array('HS256'));
-// } catch (Exception $e) {
-//     http_response_code(401);
-//     exit();
-// }
+try {
+    $decoded_token = JWT::decode($token, new Key($secret_key, 'HS256'));
+} catch (Exception $e) {
+    http_response_code(401);
+    exit();
+}
 
 
 // $data = json_decode(file_get_contents("php://input"));
 
-// use Firebase\JWT\JWT;
-// use Firebase\JWT\Key;
 
+echo json_encode($decoded_token);
 // $secret_key = "secret_key";
 // $token = $_SERVER['Authorization'];
 
 // echo "hyhhhhhhhh" . $_SERVER['Authorization'];
 // JWT::decode($token, new Key($secret_key, 'HS256'));
-// $secret_key = "secret_key";
-// $token = $_SERVER['Authorization'];
-// $decoded_token = JWT::decode($token, new Key($secret_key, 'HS256'));
+
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
