@@ -259,9 +259,10 @@ hospital_pages.load_pateint = async ()=>{
     for (let i = 0; i < service_data.length; i++) {
         
         services.innerHTML += `<li>
-        <input type="checkbox" id="${service_data[i].id}" name="${service_data[i].service_name}" value="${service_data[i].id}">
-        <label for="${service_data[i].id}">
-        ${service_data[i].service_name} ${service_data[i].service_price}\$
+        <input type="checkbox" id="service_${service_data[i].id}" name="services[]" value="${service_data[i].id}" data-price="${service_data[i].service_price}">
+                <label for="service_${service_data[i].id}">
+                    ${service_data[i].service_name} ${service_data[i].service_price}\$
+                </label>
         </li>`
         
     }
@@ -281,22 +282,36 @@ for (let i = 0; i < meds_data.length; i++) {
             <td>${meds_data[i].name}</td>
             <td>${meds_data[i].price}</td>
             <td><input type="number" name="medication[]" min="0"></td>
-            <td><input type="checkbox" name="selected_medications[]"value="Panadol"></td>
+            <td><input type="checkbox"  name="selected_medications[]" class="med-checkbox" value="${meds_data[i].name}"></td>
         </tr>
     `;
 }
-console.log(response_services.data);
-    // const employee_select = document.getElementById("employee");
-    // const response2 = await hospital_pages.getAPI(employee_url)
-    // console.log(response2.data);
-    // employees= response2.data;
-    // employees.forEach((employee) => {
-    //     const option = document.createElement("option");
-    //     option.value = employee.id;
-    //     option.text = employee.name;
-    //     employee_select.appendChild(option);
-    //   });   
+    // calculate invoice 
+    const calculateBtn = document.getElementById("calculate");
+calculateBtn.addEventListener("click", ()=> {
+    let total = 0;
+    const services = document.querySelectorAll('input[name="service[]"]:checked');
+    const selectedMeds = document.querySelectorAll('input[name="selected_medications[]"]:checked');
+    services.forEach(service => {
+        const price = service.dataset.price;
+        total += parseFloat(price);
+    });
+    const meds = document.querySelectorAll('input[name="medication[]"]');
+    meds.forEach((med, i) => {
+        const quantity = med.value;
+        const price = meds_data[i].price;
+        if (quantity > 0) {
+            total += parseFloat(price) * parseInt(quantity);
+            if (selectedMeds[i].checked) {
+                total += 10;
+            }
+        }
+    });
+    alert(`The total price is ${total.toFixed(2)}$`);
+});
 }
+
+
 
 hospital_pages.load_employee =async ()=>{
     alert(' hello employee')
