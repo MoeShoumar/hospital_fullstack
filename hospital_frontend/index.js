@@ -153,11 +153,12 @@ hospital_pages.load_admin = async ()=>{
             event.preventDefault();
             const hospital= document.getElementById("hospital_2").value;
             console.log(hospital);
+            const token = localStorage.getItem('jwt');
             const employee= document.getElementById("employee").value;
             console.log(employee);
             const data = { "hospital_id": hospital, "user_id": employee };
             const assign_employee_url = hospital_pages.base_url + "assign_employee.php";
-            const response2 = await hospital_pages.postAPI(assign_employee_url,data);
+            const response2 = await hospital_pages.postAPI(assign_employee_url,data, token);
             console.log( response2.data);
             console.log( response2.status);
             if (response2.status == 200) {
@@ -186,21 +187,45 @@ hospital_pages.load_admin = async ()=>{
                 error_message2.textContent = response2.data;
                 form_employees.appendChild(error_message2);
             } 
-        // statistics
-        // female employee
-        const females= document.getElementById('female-employees')
-        const males= document.getElementById('Male-employees')
-        const AUBMC=document.getElementById('hospital-1-patients')
-        const MAKASED=document.getElementById('hospital-2-patients')
-
-
-
-
 
     
 })
-}
+  // statistics
+        // hospital patients
+        const AUBMC=document.getElementById('hospital-1-patients')
+        const MAKASED=document.getElementById('hospital-2-patients')
+        const patient_num_url = hospital_pages.base_url + "patient_num.php";
+        const response_stat = await hospital_pages.getAPI(patient_num_url);
+        console.log( response_stat.data);
+        const pateint_stat=response_stat.data
+        pateint_stat.forEach((patient) => {
+            if ( patient.hospital_id == 1  ) {
+                const patients_aub = pateint_stat.filter((p) => p.hospital_id === 1);
+                AUBMC.textContent = patients_aub.length;
+        } else {
+            const patients_makased = pateint_stat.filter((p) => p.hospital_id === 2);
+            MAKASED.textContent = patients_makased.length;
+        }
+});
+        // employee gender
+        const females= document.getElementById('female-employees')
+        const males= document.getElementById('Male-employees')
+        const employee_num_url = hospital_pages.base_url + "get_employee.php";
+        const response_stat_employee = await hospital_pages.getAPI(employee_num_url)
+        let stat_employee = response_stat_employee.data
+        console.log(stat_employee);
+        stat_employee.forEach((employee)=>{
+            if ( employee.gender == 1  ) {
+                const female_employee = stat_employee.filter((p) => p.gender === 1);
+                females.textContent = female_employee.length;
+        } else {
+            const male_employee = stat_employee.filter((p) => p.gender === 0);
+                males.textContent = male_employee.length;
+        }  
+        })
 
+
+}
 hospital_pages.load_pateint = async ()=>{
     const users_url = hospital_pages.base_url + "assign_patient.php"
     const data = { user_id: 1, hospital_id: 1 };
@@ -208,6 +233,6 @@ hospital_pages.load_pateint = async ()=>{
     console.log(response.data);
 }
 
-hospital_pages.load_employee = ()=>{
+hospital_pages.load_employee =async ()=>{
     alert(' hello employee')
 }
