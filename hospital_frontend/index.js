@@ -59,6 +59,7 @@ hospital_pages.load_index = async ()=>{
           }
 
     });
+    // sign-up
     const form_signup = document.getElementById("signup-form");
     form_signup.addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -246,10 +247,39 @@ hospital_pages.load_admin = async ()=>{
 
 }
 hospital_pages.load_pateint = async ()=>{
-    const users_url = hospital_pages.base_url + "assign_patient.php"
-    const data = { user_id: 1, hospital_id: 1 };
-    const response= await hospital_pages.postAPI(users_url,data)
-    console.log(response.data);
+    
+    // get services
+    const users_url = hospital_pages.base_url + "get_services.php"
+    const services = document.getElementById("services");
+    const token2 = localStorage.getItem('jwt');
+
+    const response_services= await hospital_pages.getAPI(users_url)
+    service_data=response_services.data
+    console.log(service_data[0]);
+    for (let i = 0; i < service_data.length; i++) {
+        
+        services.innerHTML += `<li>
+        <input type="checkbox" id="${service_data[i].id}" name="${service_data[i].service_name}" value="${service_data[i].id}">
+        <label for="${service_data[i].id}">
+        ${service_data[i].service_name} ${service_data[i].service_price}\$
+        </li>`
+        
+    }
+    console.log(response_services.data);
+
+    // get medication
+
+
+    // const employee_select = document.getElementById("employee");
+    // const response2 = await hospital_pages.getAPI(employee_url)
+    // console.log(response2.data);
+    // employees= response2.data;
+    // employees.forEach((employee) => {
+    //     const option = document.createElement("option");
+    //     option.value = employee.id;
+    //     option.text = employee.name;
+    //     employee_select.appendChild(option);
+    //   });   
 }
 
 hospital_pages.load_employee =async ()=>{

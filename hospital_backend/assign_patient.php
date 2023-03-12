@@ -39,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $json_data = file_get_contents('php://input'); //gwet data from body
         $data = json_decode($json_data, true); //true to store them as an array
         $hospital_id = $data['hospital_id'];
-        echo $hospital_id;
         $user_id = $data['user_id'];
         $query = $mysqli->prepare('SELECT * FROM  hospital_users WHERE user_id = ?');
         $query->bind_param('s', $user_id);
