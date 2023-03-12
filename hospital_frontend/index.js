@@ -17,7 +17,6 @@ hospital_pages.postAPI = async (api_url,api_data, api_token = null) =>{
             api_data,
             {
                 headers:{
-                    "Content-Type": "application/json",
                     "Authorization" : "token" +api_token
                 }
             }
@@ -40,11 +39,8 @@ hospital_pages.load_index = async ()=>{
         const data = { email: email, password: password };
         const signin_url = hospital_pages.base_url + "signin.php";
         const response = await hospital_pages.postAPI(signin_url,data);
-        // const response_string = JSON.stringify(response.data);
-        // const parsed_data = JSON.parse(response.data);
-        console.log(typeof response.data);
-        // console.log(typeof response.data['user_type']); 
-        if (response.data.user_type == 3) {
+        console.log( response.data);
+        if (response.data.status !== "null" && response.data.user_type == 3) {
             localStorage.setItem('jwt', response.data.token);
             window.location.href = "adminpanel.html";}
         else if (response.data.status !== "null" && response.data.user_type == 2) {
@@ -63,15 +59,59 @@ hospital_pages.load_index = async ()=>{
     });
 }
 
-
-       
-    // localStorage.setItem('jwt', token);
-
-
-
-
 hospital_pages.load_admin = ()=>{
-    alert(' helloadmin')
+    const form = document.getElementById("Assign_Patients_form");
+        
+
+
+
+
+
+
+
+
+
+
+    
+    form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const hospital= document.getElementById("hospital").value;
+        console.log(hospital);
+        const patient= document.getElementById("patient").value;
+        console.log(patient);
+        const data = { "hospital_id": hospital, "user_id": patient };
+        const assign_patient_url = hospital_pages.base_url + "assign_patient.php";
+        const response = await hospital_pages.postAPI(assign_patient_url,data);
+        console.log( response.data);
+        console.log( response.status);
+        if (response.status == 200) {
+            const error_message = document.getElementById("error-message");
+            if (error_message) {
+                error_message.remove();
+            }
+            let success_message = document.getElementById("success-message");
+            if (success_message && response.data != "Patient assigned successfully") {
+                success_message.remove();
+                success_message = null;
+            }
+            if (!success_message) {
+                success_message = document.createElement("div");
+                success_message.setAttribute("id", "success-message");
+                form.appendChild(success_message);
+            }
+            success_message.textContent = response.data;
+        } else {
+            const success_message = document.getElementById("success-message");
+            if (success_message) {
+                success_message.remove();
+            }
+            const error_message = document.createElement("div");
+            error_message.setAttribute("id", "error-message");
+            error_message.textContent = response.data;
+            form.appendChild(error_message);
+        } 
+    
+})
 }
 
 hospital_pages.load_pateint = async ()=>{

@@ -9,10 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_SERVER['CONTENT_TYPE'] === 'application/json') { //check data form (json)
         $json_data = file_get_contents('php://input'); //gwet data from body
         $data = json_decode($json_data, true); //true to store them as an aray
-        $hostpital_id = $data['hospital_id'];
+        $hospital_id = $data['hospital_id'];
         $user_id = $data['user_id'];
         $query = $mysqli->prepare('SELECT * FROM  hospital_users WHERE user_id = ?');
-        $query->bind_param('i', $user_id);
+        $query->bind_param('s', $user_id);
         $query->execute();
         $result = $query->get_result();
         $data = $result->fetch_assoc();
