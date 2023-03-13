@@ -321,12 +321,19 @@ calculateBtn.addEventListener("click", ()=> {
   const ehr = document.querySelector('input[name="ehr"]').value;
   const bloodtype = document.querySelector('input[name="bloodtype"]').value;
   const token4 = localStorage.getItem('jwt');
-  console.log(token4);
 const info_url = hospital_pages.base_url + "change_info_patient.php"
 const data = { "name": name, "ehr": ehr, "bloodtype": bloodtype };
 const response_emp= await hospital_pages.postAPI(info_url,data,token4)
 patient_data=response_emp.data
-console.log(patient_data);
+
+console.log(response_emp.status);
+if (response_emp.status == 200) {
+    update_message.innerHTML="Info updated succesfully"
+
+}else{
+    update_message.innerHTML="wrong info, please try again"
+}
+
 });
 }
 
@@ -335,19 +342,26 @@ console.log(patient_data);
 hospital_pages.load_employee =async ()=>{
     
     const saveButton = document.querySelector('#change_info');
+    const update_message = document.querySelector('#update_message');
     saveButton.addEventListener('click', async (event)  =>{
         event.preventDefault(); 
   const name = document.querySelector('input[name="name"]').value;
   const ssn = document.querySelector('input[name="ssn"]').value;
   const position = document.querySelector('select[name="position"]').value;
+
   const token3 = localStorage.getItem('jwt');
   console.log(token3);
 const emp_url = hospital_pages.base_url + "change_info_employee.php"
 const data = { "name": name, "ssn": ssn, "position": position  };
 const response_emp= await hospital_pages.postAPI(emp_url,data,token3)
 emp_data=response_emp.data
-console.log(emp_data);
+console.log(response_emp.status);
+if (response_emp.status == "Info updated succesfully") {
+    update_message.innerHTML="Info updated succesfully"
 
+}else{
+    update_message.innerHTML="wrong info, please try again"
+}
 });
 
 }
