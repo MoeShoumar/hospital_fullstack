@@ -47,6 +47,7 @@ hospital_pages.load_index = async ()=>{
             window.location.href = "adminpanel.html";}
         else if (response.data.status !== "null" && response.data.user_type == 2) {
             localStorage.setItem('jwt', response.data.token);
+            // localStorage.setItem('id', response.data.)
             console.log(localStorage.getItem('jwt')); 
             window.location.href = "employee.html";}
         else if (response.data.status !== "null" && response.data.user_type == 1) {
@@ -314,5 +315,20 @@ calculateBtn.addEventListener("click", ()=> {
 
 
 hospital_pages.load_employee =async ()=>{
-    alert(' hello employee')
+    
+    const saveButton = form.querySelector('#change_info');
+    saveButton.addEventListener('click', async (event)  =>{
+        event.preventDefault(); 
+  const name = form.querySelector('input[name="name"]').value;
+  const ssn = form.querySelector('input[name="ssn"]').value;
+  const position = form.querySelector('select[name="position"]').value;
+
+const emp_url = hospital_pages.base_url + "change_info_patients.php"
+const data = { "name": name, "ssn": ssn, "position": position  };
+const response_emp= await hospital_pages.getAPI(emp_url,data)
+emp_data=response_emp.data
+console.log(emp_data);
+
+});
+
 }
