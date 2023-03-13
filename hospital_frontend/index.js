@@ -310,6 +310,24 @@ calculateBtn.addEventListener("click", ()=> {
     });
     alert(`The total price is ${total.toFixed(2)}$`);
 });
+
+
+
+    // change info
+    const saveButton = document.querySelector('#change_info_pateint');
+    saveButton.addEventListener('click', async (event)  =>{
+        event.preventDefault(); 
+  const name = document.querySelector('input[name="name"]').value;
+  const ehr = document.querySelector('input[name="ehr"]').value;
+  const bloodtype = document.querySelector('input[name="bloodtype"]').value;
+  const token4 = localStorage.getItem('jwt');
+  console.log(token4);
+const info_url = hospital_pages.base_url + "change_info_patient.php"
+const data = { "name": name, "ehr": ehr, "bloodtype": bloodtype };
+const response_emp= await hospital_pages.postAPI(info_url,data,token4)
+patient_data=response_emp.data
+console.log(patient_data);
+});
 }
 
 
