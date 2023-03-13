@@ -316,16 +316,17 @@ calculateBtn.addEventListener("click", ()=> {
 
 hospital_pages.load_employee =async ()=>{
     
-    const saveButton = form.querySelector('#change_info');
+    const saveButton = document.querySelector('#change_info');
     saveButton.addEventListener('click', async (event)  =>{
         event.preventDefault(); 
-  const name = form.querySelector('input[name="name"]').value;
-  const ssn = form.querySelector('input[name="ssn"]').value;
-  const position = form.querySelector('select[name="position"]').value;
-
-const emp_url = hospital_pages.base_url + "change_info_patients.php"
+  const name = document.querySelector('input[name="name"]').value;
+  const ssn = document.querySelector('input[name="ssn"]').value;
+  const position = document.querySelector('select[name="position"]').value;
+  const token3 = localStorage.getItem('jwt');
+  console.log(token3);
+const emp_url = hospital_pages.base_url + "change_info_employee.php"
 const data = { "name": name, "ssn": ssn, "position": position  };
-const response_emp= await hospital_pages.getAPI(emp_url,data)
+const response_emp= await hospital_pages.postAPI(emp_url,data,token3)
 emp_data=response_emp.data
 console.log(emp_data);
 
